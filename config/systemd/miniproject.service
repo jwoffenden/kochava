@@ -1,0 +1,9 @@
+[Unit]
+Description=Go Mini Project
+Wants=redis-server.target
+
+[Service]
+ExecStart=/usr/bin/go run /root/src/kochavaminiproject/a.go
+
+[Install]
+WantedBy=multi-user.target
