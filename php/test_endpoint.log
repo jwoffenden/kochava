@@ -1,0 +1,9 @@
+Request URI: /postback.php?title=Gopher&image=https%3A%2F%2Fblog.golang.org%2Fgopher%2Fgopher.png&foo=null
+array(3) {
+  ["title"]=>
+  string(6) "Gopher"
+  ["image"]=>
+  string(41) "https://blog.golang.org/gopher/gopher.png"
+  ["foo"]=>
+  string(4) "null"
+}
