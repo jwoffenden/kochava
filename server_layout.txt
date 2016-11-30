@@ -1,0 +1,15 @@
+Redis:
+Redis is configured on port 50002.
+
+A decent performance boost could be gained by changing it to a Unix socket instead of TCP. Modify php/inc/redis.php and postback.go's "createRedisConnection" function accordingly if you do.
+
+PHP:
+I've disabled the following modules in addition to the digitalocean defaults: exec,system,shell_exec,passthru,getmyuid,getmypid,listen,proc_open,eval,display_errors,track_errors,allow_url_fopen,allow_url_include
+
+Check over the list and make sure you don't need to add or remove anything from it.
+
+Go/GoLang:
+$GOPATH is set to /usr/local/lib/go. If that changes, the systemd script at /etc/systemd/system/miniproject.service.d/gopath.conf needs to be updated accordingly.
+
+General:
+Convenience scripts in /root/bin may be helpful to you. "rgo" resets the Go service via systemd and monitors its output on the command line, for instance.

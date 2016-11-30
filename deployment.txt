@@ -1,0 +1,26 @@
+deployment:
+
+-- Set up PHP web request ingestor --
+1. Put everything in the "php" directory into your web server document root, or symlink it there
+2. edit php/inc/config.php and enable/disable/configure the mysql audit log. This should be disabled for production but enabled for development. It logs the input and output of each request for easy reproduction of results.
+3. edit php/inc/redis.php to set the IP/Port or unix socket of redis
+4. You will need to install php modules for json, mbstring, curl (for the test script), mysql (if you have enabled the audit log or database postback log), and redis.
+
+-- Set up Go service --
+1. Edit the redis port and password in postback.go to match your system redis configuration
+2. golang needs the following packages and their dependencies:
+    fmt, log, encoding/json, net/url, bytes, strings, github.com/garyburd/redigo/redis, time, net/http, io/ioutil, regexp
+3. Symlink or copy everything from config/systemd into /etc/systemd/system
+4. Adjust the path in miniproject.service to point to the go source
+5. Adjust miniproject.service.d/goroot.conf to set the correct GOPATH and GOROOT
+6. Start the service by executing systemctl daemon-reload && systemctl start miniproject. If it doesn't successfully start, investigate errors with systemctl status miniproject.
+
+-- Optional: MySQL --
+If you decide to enable the audit log or database postback log you'll need mysql installed. Put its credentials in inc/config.php
+
+-- Testing the Deployment --
+Two files, test_request.php and test_endpoint.php are present to test all the components end-to-end of the system. These should NOT be deployed in production as they are for testing purposes only.
+
+Edit test_request.php and make sure the $aruments variable contains the correct ip address/hostname of your server and then either point a browser at it or use php from the command line to test it.
+
+test_endpoint.php is a minimal test endpoint for the Go service to post to. It logs all the arguments it is given to test_endpoint.log for verification.
