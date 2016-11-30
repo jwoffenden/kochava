@@ -1,0 +1,3 @@
+#!/bin/bash
+#convenience command to recursively grep through the current directory
+grep -rn --color "$*" *

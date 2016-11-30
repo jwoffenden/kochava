@@ -1,0 +1,5 @@
+#!/bin/bash
+#reset the go server and monitor its status via systemd
+systemctl stop miniproject
+systemctl start miniproject
+systemctl status miniproject

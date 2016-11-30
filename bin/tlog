@@ -1,0 +1,3 @@
+#!/bin/bash
+#convenience command to monitor the apache error logs
+tail -f /var/log/apache2/error.log
